@@ -1,6 +1,6 @@
 databases:
   - name: lecturaRailsApi
-    databaseName: lecturaDB
+    databaseName: lecturaRailsApi
     user: mysite
     plan: free
 
