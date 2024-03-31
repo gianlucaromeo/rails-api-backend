@@ -6,6 +6,7 @@
 #
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
@@ -22,4 +23,7 @@ test:
 
 production:
   <<: *default
-  database: storage/production.sqlite3
+  url: <%= ENV['DATABASE_URL'] %>
+  database: my_rails_app_db  # storage/production.sqlite3
+  username: my_rails_app
+  password: <%= ENV['MY_RAILS_APP_DATABASE_PASSWORD'] %>

@@ -1,12 +1,12 @@
 databases:
-  - name: lecturaRailsApi
-    databaseName: lecturaRailsApi
+  - name: my_rails_app
+    databaseName: my_rails_app
     user: mysite
     plan: free
 
 services:
   - type: web
-    name: lecturaRailsApi
+    name: my_rails_app
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
