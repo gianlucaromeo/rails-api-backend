@@ -12,8 +12,8 @@ bundle install
 
 # "bundle exec": Execute a command in the context of the bundle.
 # "assets:precompile": Compile all the assets named in config.assets.precompile.
-bundle exec rails assets:precompile
+# bundle exec rails assets:precompile
 
 # "bundle exec": Execute a command in the context of the bundle.
 # "assets:clean": Remove old assets.
-bundle exec rails assets:clean
+# bundle exec rails assets:clean
