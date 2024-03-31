@@ -15,4 +15,7 @@ Rails.application.routes.draw do
 
   # User
   get "/me", to: "users#me"
+
+  # To set a root path
+  root to: "application#root"
 end

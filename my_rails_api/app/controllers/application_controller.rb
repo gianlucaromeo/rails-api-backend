@@ -4,6 +4,12 @@ class ApplicationController < ActionController::API
     before_action :check_token_authorization
     rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
 
+    def root
+        render json: {
+            message: "Welcome to my Rails API"
+        }, status: :ok
+    end
+
     def refresh_token
         decoded_token = get_decoded_token
         user_id = decoded_token[0]['user_id']
