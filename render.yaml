@@ -1,7 +1,7 @@
 databases:
   - name: my_rails_app
-    databaseName: my_rails_app
-    user: mysite
+    databaseName: my_rails_app_db
+    user: my_rails_app
     plan: free
 
 services:
