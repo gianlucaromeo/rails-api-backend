@@ -8,6 +8,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       "password": "test_password"
     }
     User.create!(@user)
+    User.update_all(confirmed_at: DateTime.now, confirmation_token: nil)
     puts "\n[START]"
   end
 
@@ -17,6 +18,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should get me" do
     post "/login", params: @user.slice(:email, :password)
+    assert_response :accepted
     token = JSON.parse(@response.body)["token"]
     get "/me", headers: { "Authorization" => "Bearer " + token }
     assert_response :ok

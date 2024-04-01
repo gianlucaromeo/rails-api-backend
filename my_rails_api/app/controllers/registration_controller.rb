@@ -1,5 +1,5 @@
 class RegistrationController < ApplicationController
-    skip_before_action :check_token_authorization, only: [:create, :confirm_email]
+    skip_before_action :check_token_authorization, :check_email_confirmed, only: [:create, :confirm_email]
     rescue_from ActiveRecord::RecordInvalid, with: :handle_invalid_record
 
     def create
@@ -19,20 +19,17 @@ class RegistrationController < ApplicationController
         end
 
         user = User.create!(registration_params)
-        token, exp = get_encoded_token(user_id: user.id)
         
         render json: { 
-            user: UserSerializer.new(user),
-            token: token
-        }, status: :created  # 201
+            message: "User created successfully. Please confirm your email."
+        }, status: :created
 
         UserMailer.confirmation_email(user).deliver_now!
     end
 
     def confirm_email
-        token = email_confirmation_params[:token]
-        puts token
-        user = User.find_by(confirmation_token: token)
+        confirmation_token = email_confirmation_params[:confirmation_token]
+        user = User.find_by(confirmation_token: confirmation_token)
         if user.present?
             user.confirm!
             render json: {
@@ -53,7 +50,7 @@ class RegistrationController < ApplicationController
     end
 
     def email_confirmation_params
-        params.permit(:token)
+        params.permit(:confirmation_token)
     end
 
     def handle_invalid_record(e)

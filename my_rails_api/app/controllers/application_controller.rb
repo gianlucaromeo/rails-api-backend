@@ -1,7 +1,9 @@
 # Every controller will inherit from this class.
 class ApplicationController < ActionController::API
 
-    before_action :check_token_authorization
+    before_action :check_email_confirmed, 
+                  :check_token_authorization
+    
     skip_before_action :check_token_authorization, only: [:root]
     rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
 
@@ -70,6 +72,14 @@ class ApplicationController < ActionController::API
     def check_token_authorization
         unless !!current_user  # !! converts the value to a boolean
             render json: { error: 'Please log in' }, status: :unauthorized
+        end
+    end
+
+    def check_email_confirmed
+        if current_user
+            unless current_user.confirmed?
+                render json: { error: 'Please confirm your email' }, status: :unauthorized
+            end
         end
     end
 

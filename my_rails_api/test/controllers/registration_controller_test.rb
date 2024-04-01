@@ -39,7 +39,7 @@ class RegistrationControllerTest < ActionDispatch::IntegrationTest
   test "should confirm email" do
     user = User.create!(@user)
     user.update(confirmation_token: "test_mock_token")
-    get "/confirmEmail", params: { token: "test_mock_token" }
+    get "/confirmEmail", params: { confirmation_token: "test_mock_token" }
     assert_response :ok
   end
 

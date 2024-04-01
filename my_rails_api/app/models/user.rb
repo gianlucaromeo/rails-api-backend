@@ -24,7 +24,6 @@ class User < ApplicationRecord
     end
 
     def confirmed?
-        # Check if the user has a confirmed_at timestamp
         confirmed_at.present?
     end
 end

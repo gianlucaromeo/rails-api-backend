@@ -8,6 +8,7 @@ class RefreshTokenTest < ActionDispatch::IntegrationTest
             "password": "test_password"
         }
         User.create!(@user)        
+        User.update_all(confirmed_at: DateTime.now, confirmation_token: nil)
         puts "\n[START]"
     end
 
