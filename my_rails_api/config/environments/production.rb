@@ -78,8 +78,8 @@ Rails.application.configure do
     enable_starttls_auto: true  # Enable TLS for security
   }
   config.action_mailer.default_url_options = { 
-    host: "localhost",
-    port: 3000,
+    host: "https://my-rails-app-b08x.onrender.com",
+    port: 10000, # Render uses port 10000 by default
   }  # Set the default URL options for the mailer
 
   # Ignore bad email addresses and do not raise email delivery errors.
