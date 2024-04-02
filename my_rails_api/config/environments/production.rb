@@ -79,7 +79,7 @@ Rails.application.configure do
   }
   config.action_mailer.default_url_options = { 
     host: "https://my-rails-app-b08x.onrender.com",
-    port: 10000, # Render uses port 10000 by default
+    # port: 10000, # Render uses port 10000 by default
   }  # Set the default URL options for the mailer
 
   # Ignore bad email addresses and do not raise email delivery errors.
