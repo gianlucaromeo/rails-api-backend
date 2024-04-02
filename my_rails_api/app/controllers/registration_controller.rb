@@ -42,6 +42,14 @@ class RegistrationController < ApplicationController
         end
     end
 
+    # TODO: Fix -- destroy creates infinte loop
+    def delete_account
+        current_user.destroy!
+        render json: {
+            message: "Account deleted successfully"
+        }, status: :ok
+    end
+
     private
 
     def registration_params

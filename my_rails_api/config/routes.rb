@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # Registration
   post "/register", to: "registration#create"
   get "/confirmEmail", to: "registration#confirm_email"
+  delete "/deleteAccount", to: "registration#delete_account"
   
   # Login
   post "/login", to: "login#login"

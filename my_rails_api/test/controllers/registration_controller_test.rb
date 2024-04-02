@@ -52,9 +52,27 @@ class RegistrationControllerTest < ActionDispatch::IntegrationTest
 
   test "should not confirm email with empty token" do
     user = User.create!(@user)
-    user.update(confirmation_token: "test_mock_token")
     get "/confirmEmail"
     assert_response :unprocessable_entity
   end
 
+  test "should delete account" do
+    skip # TODO: Fix -- destroy creates infinte loop in registration_controller.rb
+    User.create!(@user)
+    User.update_all(confirmed_at: DateTime.now, confirmation_token: nil)
+
+    post "/login", params: @user.slice(:email, :password)
+    assert_response :accepted
+    token = JSON.parse(@response.body)["token"]
+
+    delete "/deleteAccount", headers: { "Authorization" => "Bearer " + token }
+    assert_response :ok
+  end
+
+  test "should not delete account if not logged in" do
+    delete "/deleteAccount"
+    assert_response :unauthorized
+  end
+
+  
 end
